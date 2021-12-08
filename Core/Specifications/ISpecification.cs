@@ -13,6 +13,11 @@ namespace Core.Specifications
         Expression<Func<T, bool>> Criteria { get; }
 
         // representa las relaciones q vas a poder implentar sobre esa intedidad
-        List<Expression<Func<T, object>>> Includes{get;}
+        List<Expression<Func<T, object>>> Includes { get; }
+
+        Expression<Func<T, object>> OrderBy {get;}
+
+        Expression<Func<T, object>> OrderByDescending { get; }
+
     }
 }
