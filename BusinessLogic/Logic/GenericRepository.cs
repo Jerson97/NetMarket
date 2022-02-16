@@ -22,6 +22,7 @@ namespace BusinessLogic.Logic
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await _contex.Set<T>().ToListAsync();
+            
         }
 
         public async Task<T> GetByIdAsync(int id)

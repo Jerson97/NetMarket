@@ -1,8 +1,10 @@
 using BusinessLogic.Data;
 using BusinessLogic.Logic;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,13 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = services.AddIdentityCore<Usuario>();
+            builder = new IdentityBuilder(builder.UserType, builder.Services);
+            builder.AddEntityFrameworkStores<SeguridadDbContext>();
+            builder.AddSignInManager<SignInManager<Usuario>>();
+
+            services.AddAuthentication();
+
             services.AddAutoMapper(typeof(Mappingprofiles));
 
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
@@ -39,17 +48,22 @@ namespace WebApi
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddDbContext<SeguridadDbContext>(x =>
+            {
+                x.UseSqlServer(Configuration.GetConnectionString("IdentitySeguridad"));
+            });
 
             services.AddTransient<IProductoRepository, ProductoRepository>();
             services.AddControllers();
 
-            services.AddCors(opt => {
+            services.AddCors(opt =>
+            {
                 opt.AddPolicy("CorsRule", rule =>
                 {
                     rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*");
                 });
-            
-            })
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

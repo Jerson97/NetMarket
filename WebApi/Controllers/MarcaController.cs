@@ -16,6 +16,8 @@ namespace WebApi.Controllers
         public MarcaController(IGenericRepository<Marca> marcaRepository)
         {
             _marcaRepository = marcaRepository;
+
+            
         }
 
         [HttpGet]
