@@ -16,20 +16,20 @@ namespace BusinessLogic.Data
             {
                 var usuario = new Usuario
                 {
-                    Nombre = "Vaxi",
-                    Apellido = "Drez",
-                    UserName = "vaxidrez",
-                    Email = "vaxi.drez@gmail.com",
+                    Nombre = "Jerson",
+                    Apellido = "Soto",
+                    UserName = "ramijer",
+                    Email = "jersonramirez97@gmail.com",
                     Direccion = new Direccion
                     {
-                        Calle = "Los Proceres 321",
-                        Ciudad = "Mexico DF",
-                        CodigoPostal = "28985",
-                        Departamento = "Mexico",
+                        Calle = "Sucre 245",
+                        Ciudad = "Lima",
+                        CodigoPostal = "01",
+                        Departamento = "Lima",
                     }
                 };
 
-                await userManager.CreateAsync(usuario, "VaxiDrez2025$");
+                await userManager.CreateAsync(usuario, "JersonR2025$");
             }
         }
     }

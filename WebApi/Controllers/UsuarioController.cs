@@ -133,6 +133,7 @@ namespace WebApi.Controllers
             var usuario = await _userManager.BuscarUsuarioConDireccionAsync(HttpContext.User);
 
             usuario.Direccion = _mapper.Map<DireccionDto, Direccion>(direccion);
+            usuario.Direccion.UsuarioId = usuario.Id;
             var resultado = await _userManager.UpdateAsync(usuario);
 
             if (resultado.Succeeded)
